@@ -1,10 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pub_tran_exercise/page_router.dart';
+
+import 'assets/my_app_theme.dart';
 
 void main() {
-  runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+
+  runApp(GetMaterialApp(
+    debugShowCheckedModeBanner: false,
+    initialBinding: PageRouter.initialBinding,
+    title: 'pub_tran_exercise',
+    theme: MyAppTheme.themeData,
+    initialRoute: MyApp.route,
+    getPages: PageRouter.getPages,
+  ));
 }
 
 class MyApp extends StatelessWidget {
+  static const String route = 'MyApp';
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
