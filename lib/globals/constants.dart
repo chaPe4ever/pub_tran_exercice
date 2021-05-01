@@ -1,6 +1,9 @@
 /// REST Api
-const String kBaseUrl = 'https://your_base_url/v1';
+const String kBaseUrl = 'https://mvvvip1.defas-fgi.de';
 const String kTokenUrl = 'https://your_token_url';
+
+const String kSearchApiPath =
+    '/mvv/XML_STOPFINDER_REQUEST?language=de&outputFormat=RapidJSON&type_sf=any';
 
 /// GetStorage keys
 const String kApiAuthToken = 'apiAuthToken';

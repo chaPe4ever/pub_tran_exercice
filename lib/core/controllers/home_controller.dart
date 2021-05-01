@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:pub_tran_exercise/core/contracts/data/i_search_provider.dart';
 import 'package:pub_tran_exercise/core/contracts/general/i_connectivity.dart';
 
 import 'base_controller.dart';
@@ -7,6 +8,7 @@ class HomeController extends SuperController with BaseController {
   // Fields
   Rx<int> _rxCounter;
   IConnectivity _connectivityService;
+  ISearchProvider _searchProviderService;
 
   // Getters
   int get counter => _rxCounter.value;
@@ -21,6 +23,7 @@ class HomeController extends SuperController with BaseController {
     _rxCounter = 0.obs;
 
     _connectivityService = Get.find();
+    _searchProviderService = Get.find();
 
     isBusy = false;
 
