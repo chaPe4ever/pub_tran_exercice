@@ -7,6 +7,7 @@ const String kSearchApiPath =
 
 /// GetStorage keys
 const String kApiAuthToken = 'apiAuthToken';
+const String kLocationsHistory = 'locationsHistory';
 
 /// Strings-Sentences
 const String kConnectionError = 'Connection  Error';

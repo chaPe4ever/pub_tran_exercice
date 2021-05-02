@@ -16,4 +16,23 @@ class LocationsEntity with JsonConvert<LocationsEntity> {
   LocationsParentEntity parent;
   List<LocationsAssignedStopsEntity> assignedStops;
   LocationsPropertiesEntity properties;
+  bool inHistory;
+
+  // LocationsEntity();
+
+  LocationsEntity({
+    this.inHistory,
+    this.name,
+    this.disassembledName,
+    this.assignedStops,
+    this.coord,
+    this.id,
+    this.isBest,
+    this.isGlobalId,
+    this.matchQuality,
+    this.parent,
+    this.productClasses,
+    this.properties,
+    this.type,
+  });
 }
