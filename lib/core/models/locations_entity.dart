@@ -18,8 +18,6 @@ class LocationsEntity with JsonConvert<LocationsEntity> {
   LocationsPropertiesEntity properties;
   bool inHistory;
 
-  // LocationsEntity();
-
   LocationsEntity({
     this.inHistory,
     this.name,
