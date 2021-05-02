@@ -33,7 +33,6 @@ dependencies:
   dio: ^4.0.0
   connectivity: ^3.0.3
   material_floating_search_bar: ^0.3.4
-#  material_design_icons_flutter: ^4.0.5955
 
 dev_dependencies:
   integration_test:
