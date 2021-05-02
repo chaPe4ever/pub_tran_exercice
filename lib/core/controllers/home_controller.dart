@@ -19,12 +19,14 @@ class HomeController extends SuperController with BaseController {
   FloatingSearchBarController _customFloatingSearchBarController;
   GetStorage _box;
   List<LocationsEntity> _locationsHistory;
+  Rx<LocationsEntity> _locationPicked;
 
   // Getters
   int get counter => _rxCounter.value;
   List<LocationsEntity> get locations => _locations;
   FloatingSearchBarController get customFloatingSearchBarController =>
       _customFloatingSearchBarController;
+  LocationsEntity get locationPicked => _locationPicked.value;
 
   // Setters
 
@@ -42,6 +44,7 @@ class HomeController extends SuperController with BaseController {
       _locations = <LocationsEntity>[].obs;
       _recentLocationsPicked = <LocationsEntity>[];
       _customFloatingSearchBarController = FloatingSearchBarController();
+      _locationPicked = LocationsEntity().obs;
       _populateSavedHistoryIfAny();
 
       // Listen to connection changes
@@ -121,31 +124,16 @@ class HomeController extends SuperController with BaseController {
       customFloatingSearchBarController.close();
 
       // Keep around 6 last picks as history list
-      // _locationsHistory =
-      //     _box?.read<List<LocationsEntity>>(kLocationsHistory) ??
-      //         <LocationsEntity>[];
       _populateSavedHistoryIfAny();
       await _addLocationToHistory(location);
-      // bool isQueryInList =
-      //     _locationsHistory.any((element) => element.name == location.name);
-      // if (_locationsHistory.length > 5) {
-      //   if (!isQueryInList) {
-      //     _locationsHistory.add(location);
-      //     _locationsHistory.removeAt(0);
-      //     await _box.write(kLocationsHistory, _locationsHistory);
-      //   }
-      // } else {
-      //   if (!isQueryInList) {
-      //     _locationsHistory.add(location);
-      //     await _box.write(kLocationsHistory, _locationsHistory);
-      //   }
-      // }
 
       _populateSavedHistoryIfAny();
       if (_locationsHistory != null) {
         _locations.clear();
         _locations.addAll(_locationsHistory.reversed);
       }
+
+      _locationPicked.value = location;
 
       // Populate the card to show on home view
     } catch (e) {
@@ -155,6 +143,11 @@ class HomeController extends SuperController with BaseController {
     }
   }
 
+  void onClearButtonTapped() {
+    _locationPicked.value = LocationsEntity();
+  }
+
+  // private methods
   Future<void> _addLocationToHistory(LocationsEntity location) async {
     bool isQueryInList =
         _locationsHistory.any((element) => element.name == location.name);
@@ -178,11 +171,7 @@ class HomeController extends SuperController with BaseController {
   void _populateSavedHistoryIfAny() {
     var savedHistory = _box.read(kLocationsHistory) ?? <LocationsEntity>[];
     _locationsHistory = <LocationsEntity>[];
+
     _locationsHistory.addAll(savedHistory);
-    // if (savedHistory != null) {
-    //   savedHistory.forEach((locationEntity) {
-    //     _locationsHistory.add(LocationsEntity().fromJson(locationEntity));
-    //   });
-    // }
   }
 }

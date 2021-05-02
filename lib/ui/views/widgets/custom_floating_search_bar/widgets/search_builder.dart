@@ -1,48 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:pub_tran_exercise/core/controllers/home_controller.dart';
 import 'package:pub_tran_exercise/core/models/locations_entity.dart';
 import 'package:pub_tran_exercise/globals/constants.dart';
 import 'package:pub_tran_exercise/globals/helpers.dart';
 
-class CustomFloatingSearchBar extends GetView<HomeController> {
+class SearchBuilder extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      final isPortrait = Get.mediaQuery.orientation == Orientation.portrait;
-      return FloatingSearchBar(
-        hint: 'Stop, address or POI',
-        controller: controller.customFloatingSearchBarController,
-        scrollPadding: const EdgeInsets.only(top: 16, bottom: 56),
-        transitionDuration: const Duration(milliseconds: 500),
-        transitionCurve: Curves.easeInOut,
-        physics: const BouncingScrollPhysics(),
-        axisAlignment: isPortrait ? 0.0 : -1.0,
-        openAxisAlignment: 0.0,
-        width: isPortrait ? 600 : 500,
-        debounceDelay: const Duration(milliseconds: 250),
-        progress: controller.isBusy,
-        onQueryChanged: controller.onQueryChanged,
-        // Specify a custom transition to be used for
-        // animating between opened and closed stated.
-        transition: CircularFloatingSearchBarTransition(),
-        actions: [
-          FloatingSearchBarAction(
-            showIfOpened: false,
-            child: IgnorePointer(
-              child: CircularButton(
-                icon: const Icon(Icons.place),
-                onPressed: () {},
-              ),
-            ),
-          ),
-          FloatingSearchBarAction.searchToClear(
-            showIfClosed: false,
-          ),
-        ],
-        builder: (context, transition) {
-          return ClipRRect(
+    return controller.locations.length == 0
+        ? SizedBox()
+        : ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: Material(
               color: Colors.white,
@@ -56,7 +24,7 @@ class CustomFloatingSearchBar extends GetView<HomeController> {
                             Helpers.verticalSpace(10.0),
                         physics: ClampingScrollPhysics(),
                         shrinkWrap: true,
-                        itemCount: controller.locations.length,
+                        itemCount: controller?.locations?.length ?? 0,
                         itemBuilder: (BuildContext context, int index) {
                           LocationsEntity location =
                               controller.locations[index];
@@ -95,8 +63,9 @@ class CustomFloatingSearchBar extends GetView<HomeController> {
                                                               mainAxisSpacing:
                                                                   2),
                                                       itemCount: location
-                                                          .productClasses
-                                                          .length,
+                                                              ?.productClasses
+                                                              ?.length ??
+                                                          0,
                                                       itemBuilder:
                                                           (BuildContext ctx,
                                                               index) {
@@ -134,9 +103,6 @@ class CustomFloatingSearchBar extends GetView<HomeController> {
                     ),
             ),
           );
-        },
-      );
-    });
   }
 }
 

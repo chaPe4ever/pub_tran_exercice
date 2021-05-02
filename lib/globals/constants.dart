@@ -19,5 +19,6 @@ const kTramIconAssetPath = 'lib/assets/images/Tram.png';
 const kBusIconAssetPath = 'lib/assets/images/BUS.png';
 const kSBahnIconAssetPath = 'lib/assets/images/S-Bahn.png';
 const kUBahnIconAssetPath = 'lib/assets/images/U-Bahn.png';
+const kMentzLogoIconAssetPath = 'lib/assets/images/mentz.png';
 
 /// Test keys
