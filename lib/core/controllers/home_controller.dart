@@ -11,7 +11,6 @@ import 'base_controller.dart';
 
 class HomeController extends SuperController with BaseController {
   // Fields
-  Rx<int> _rxCounter;
   IConnectivity _connectivityService;
   ISearchProvider _searchProviderService;
   List<LocationsEntity> _locations;
@@ -22,7 +21,6 @@ class HomeController extends SuperController with BaseController {
   Rx<LocationsEntity> _locationPicked;
 
   // Getters
-  int get counter => _rxCounter.value;
   List<LocationsEntity> get locations => _locations;
   FloatingSearchBarController get customFloatingSearchBarController =>
       _customFloatingSearchBarController;
