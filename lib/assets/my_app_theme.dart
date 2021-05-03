@@ -9,15 +9,27 @@ class MyAppTheme {
 
 extension CustomTextTheme on TextTheme {
   TextStyle get disassembledNameTS => TextStyle(
-      fontWeight: FontWeight.w600, color: Colors.black, fontSize: 16.0);
+        fontWeight: FontWeight.w600,
+        color: Colors.black,
+        fontSize: 16.0,
+      );
 
   TextStyle get locNameTS => TextStyle(
-      fontWeight: FontWeight.w300, color: Color(0xff78909c), fontSize: 14.0);
+        fontWeight: FontWeight.w300,
+        color: Color(0xff78909c),
+        fontSize: 14.0,
+      );
 
   TextStyle get locParentNameTS => TextStyle(
         fontWeight: FontWeight.w500,
         color: Color(0xff78909c),
         fontSize: 14.0,
+      );
+
+  TextStyle get assignedStopsTS => TextStyle(
+        fontWeight: FontWeight.w600,
+        color: Colors.black,
+        fontSize: 18.0,
       );
 }
 
