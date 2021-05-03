@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pub_tran_exercise/assets/my_app_theme.dart';
 import 'package:pub_tran_exercise/core/controllers/home_controller.dart';
 import 'package:pub_tran_exercise/core/models/locations_entity.dart';
 import 'package:pub_tran_exercise/globals/constants.dart';
@@ -20,8 +21,11 @@ class SearchBuilder extends GetView<HomeController> {
                   : Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ListView.separated(
-                        separatorBuilder: (BuildContext context, int index) =>
-                            Helpers.verticalSpace(10.0),
+                        separatorBuilder: (BuildContext context, int index) {
+                          return Divider(
+                            thickness: 1.0,
+                          );
+                        },
                         physics: ClampingScrollPhysics(),
                         shrinkWrap: true,
                         itemCount: controller?.locations?.length ?? 0,
@@ -35,64 +39,83 @@ class SearchBuilder extends GetView<HomeController> {
                               await controller.onLocationListItemTap(location);
                             },
                             child: Row(
-                              mainAxisSize: MainAxisSize.min,
+                              // mainAxisSize: MainAxisSize.min,
                               children: [
-                                Flexible(
-                                  flex: 2,
+                                Expanded(
+                                  flex: 1,
                                   child: Container(
                                     child: location?.inHistory ?? false
                                         ? Icon(Icons.history)
                                         : location.type == 'street' ||
                                                 location.type == 'poi'
-                                            ? Icon(Icons.location_on_outlined)
-                                            : Column(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  GridView.builder(
-                                                      shrinkWrap: true,
-                                                      physics:
-                                                          ClampingScrollPhysics(),
-                                                      gridDelegate:
-                                                          SliverGridDelegateWithMaxCrossAxisExtent(
+                                            ? Align(
+                                                alignment: Alignment.centerLeft,
+                                                child: Icon(
+                                                    Icons.location_on_outlined))
+                                            : location.type == 'suburb'
+                                                ? Icon(Icons.home_work_sharp)
+                                                : Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: [
+                                                      GridView.builder(
+                                                          shrinkWrap: true,
+                                                          physics:
+                                                              ClampingScrollPhysics(),
+                                                          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                                                               maxCrossAxisExtent:
-                                                                  50,
+                                                                  20,
                                                               childAspectRatio:
-                                                                  3 / 2,
+                                                                  1.0,
                                                               crossAxisSpacing:
-                                                                  2,
+                                                                  4,
                                                               mainAxisSpacing:
-                                                                  2),
-                                                      itemCount: location
-                                                              ?.productClasses
-                                                              ?.length ??
-                                                          0,
-                                                      itemBuilder:
-                                                          (BuildContext ctx,
-                                                              index) {
-                                                        return Container(
-                                                          alignment:
-                                                              Alignment.center,
-                                                          child:
-                                                              populateImageByPrdClass(
-                                                                  index),
-                                                        );
-                                                      }),
-                                                ],
-                                              ),
+                                                                  4),
+                                                          itemCount: location
+                                                                  ?.productClasses
+                                                                  ?.length ??
+                                                              0,
+                                                          itemBuilder:
+                                                              (BuildContext ctx,
+                                                                  index) {
+                                                            return Container(
+                                                              // color:
+                                                              //     Colors.green,
+                                                              child:
+                                                                  populateImageByPrdClass(
+                                                                      index),
+                                                            );
+                                                          }),
+                                                    ],
+                                                  ),
                                   ),
                                 ),
                                 Helpers.horizontalSpace(10.0),
-                                Flexible(
-                                  flex: 8,
-                                  child: Text(
-                                    location?.disassembledName ??
-                                        location?.name ??
-                                        '',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16.0,
-                                    ),
+                                Expanded(
+                                  flex: 7,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      Text(
+                                        location?.disassembledName ??
+                                            location?.name ??
+                                            '',
+                                        overflow: TextOverflow.ellipsis,
+                                        textAlign: TextAlign.left,
+                                        style: Get
+                                            .theme.textTheme.disassembledNameTS,
+                                      ),
+                                      Helpers.verticalSpace(3.0),
+                                      location?.parent?.name != null
+                                          ? Text(
+                                              location.parent.name,
+                                              textAlign: TextAlign.start,
+                                              style: Get.theme.textTheme
+                                                  .locParentNameTS,
+                                            )
+                                          : SizedBox(),
+                                    ],
                                   ),
                                 ),
                               ],
@@ -107,8 +130,8 @@ class SearchBuilder extends GetView<HomeController> {
 }
 
 Widget populateImageByPrdClass(int index) {
-  double width = 22.0;
-  double height = 22.0;
+  double width = 16.0;
+  double height = 16.0;
   switch (index) {
     case 1:
       return Image.asset(
@@ -129,7 +152,7 @@ Widget populateImageByPrdClass(int index) {
         width: width,
         height: height,
       );
-    case 5:
+    // case 5:
     case 6:
       return Image.asset(
         kBusIconAssetPath,
@@ -137,6 +160,9 @@ Widget populateImageByPrdClass(int index) {
         height: height,
       );
     default:
-      return SizedBox();
+      return Icon(
+        Icons.not_listed_location_outlined,
+        size: width + 6.0,
+      );
   }
 }

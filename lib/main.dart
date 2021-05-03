@@ -18,6 +18,7 @@ void main() async {
   ]);
 
   runApp(GetMaterialApp(
+    debugShowCheckedModeBanner: false,
     initialBinding: PageRouter.initialBinding,
     theme: MyAppTheme.themeData,
     initialRoute: HomeView.route,

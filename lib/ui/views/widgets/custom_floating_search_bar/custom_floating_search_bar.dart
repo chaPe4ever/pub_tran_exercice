@@ -14,7 +14,7 @@ class CustomFloatingSearchBar extends GetView<HomeController> {
         hint: 'Stop, address or POI',
         controller: controller.customFloatingSearchBarController,
         scrollPadding: const EdgeInsets.only(top: 16, bottom: 56),
-        transitionDuration: const Duration(milliseconds: 500),
+        transitionDuration: const Duration(milliseconds: 800),
         transitionCurve: Curves.easeInOut,
         physics: const BouncingScrollPhysics(),
         axisAlignment: isPortrait ? 0.0 : -1.0,
