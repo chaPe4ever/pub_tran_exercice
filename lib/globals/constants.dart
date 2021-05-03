@@ -22,7 +22,8 @@ const kUBahnIconAssetPath = 'lib/assets/images/U-Bahn.png';
 const kMentzLogoIconAssetPath = 'lib/assets/images/mentz.png';
 
 /// Test keys
-
+const String kFloatingSearchBarKey = 'floatingSearchBarKey';
+const String kInkWellKey = 'inkWellKey';
 // Test strings
 const String kServiceTest = 'service_test';
 const Map<String, dynamic> kQueryMockCallback = {

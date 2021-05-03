@@ -11,24 +11,27 @@ class SearchBody extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => Container(
-        color: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.only(top: 65.0, left: 10.0, right: 10.0),
-          child: controller?.locationPicked?.id == null
-              ? SizedBox()
-              : Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    SelectedLocationHeader(),
-                    Helpers.verticalSpaceSmall(),
-                    LocationPickedCardInfo(),
-                    Helpers.verticalSpaceSmall(),
-                    AssignedStopsHeader(),
-                    Helpers.verticalSpaceSmall(),
-                    AssignedStopsList(),
-                  ],
-                ),
+      () => SingleChildScrollView(
+        child: Container(
+          color: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.only(
+                top: 65.0, left: 10.0, right: 10.0, bottom: 10.0),
+            child: controller?.locationPicked?.id == null
+                ? SizedBox()
+                : Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      SelectedLocationHeader(),
+                      Helpers.verticalSpaceSmall(),
+                      LocationPickedCardInfo(),
+                      Helpers.verticalSpaceSmall(),
+                      AssignedStopsHeader(),
+                      Helpers.verticalSpaceSmall(),
+                      AssignedStopsList(),
+                    ],
+                  ),
+          ),
         ),
       ),
     );

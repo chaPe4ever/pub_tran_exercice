@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:pub_tran_exercise/core/controllers/home_controller.dart';
+import 'package:pub_tran_exercise/globals/constants.dart';
 import 'package:pub_tran_exercise/ui/views/widgets/custom_floating_search_bar/widgets/search_body/search_body.dart';
 import 'package:pub_tran_exercise/ui/views/widgets/custom_floating_search_bar/widgets/search_builder/search_builder.dart';
 
@@ -11,6 +12,7 @@ class CustomFloatingSearchBar extends GetView<HomeController> {
     return Obx(() {
       final isPortrait = Get.mediaQuery.orientation == Orientation.portrait;
       return FloatingSearchBar(
+        key: Key(kFloatingSearchBarKey),
         hint: 'Stop, address or POI',
         controller: controller.customFloatingSearchBarController,
         scrollPadding: const EdgeInsets.only(top: 16, bottom: 56),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pub_tran_exercise/core/controllers/home_controller.dart';
 import 'package:pub_tran_exercise/core/models/locations_entity.dart';
+import 'package:pub_tran_exercise/globals/constants.dart';
 import 'package:pub_tran_exercise/globals/helpers.dart';
 import 'package:pub_tran_exercise/ui/views/widgets/custom_floating_search_bar/widgets/search_builder/widgets/icon_info_area.dart';
 import 'package:pub_tran_exercise/ui/views/widgets/custom_floating_search_bar/widgets/search_builder/widgets/location_info_area.dart';
@@ -33,6 +34,7 @@ class SearchBuilder extends GetView<HomeController> {
                           LocationsEntity location =
                               controller.locations[index];
                           return InkWell(
+                            key: Key(kInkWellKey),
                             borderRadius: BorderRadius.all(Radius.circular(15)),
                             splashColor: Colors.black,
                             onTap: () async {
